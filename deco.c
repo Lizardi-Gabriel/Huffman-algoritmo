@@ -172,7 +172,7 @@ int obtChar(ap_nodo raiz, int sec[]) {
 
 int main() {
 
-	double utime0, stime0, wtime0,utime1, stime1, wtime1;
+	//double utime0, stime0, wtime0,utime1, stime1, wtime1;
 	long sim, i ;
 	char extension[5];
 	long frec[256];
@@ -192,7 +192,7 @@ int main() {
 		printf("\nError opening file\n");
 	}
 
-	uswtime(&utime0, &stime0, &wtime0);
+	//uswtime(&utime0, &stime0, &wtime0);
 
 	textDeco = malloc(sim + 1);
 
@@ -245,9 +245,8 @@ int main() {
 		cont++;
 		wchar = (int*)realloc(wchar,(cont+1)*sizeof(int)); 
 	}
-	printf("%d\n",aux_arr );
 	
-	uswtime(&utime1, &stime1, &wtime1);
+	//uswtime(&utime1, &stime1, &wtime1);
 
 	int tam_ext = sizeof(extension);
 	int j = 0;
@@ -277,7 +276,7 @@ int main() {
 	// los datos ya estan
 	printf("Tamaño del archivo decodificado(en bytes): %ld\n", cont);
 	printf("Nombre del archivo decodificado: %s\n", nombre);
-	printf("Tiempo de ejecucion (Tiempo total)  %.10e s\n",  wtime1 - wtime0);
+	//printf("Tiempo de ejecucion (Tiempo total)  %.10e s\n",  wtime1 - wtime0);
 	free(wchar);
 	free(arrNodos);
 	free(sec);
