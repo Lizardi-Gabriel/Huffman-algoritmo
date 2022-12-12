@@ -190,30 +190,29 @@ int main() {
 	FILE *infile = fopen("codificacion.mugi", "rb");
 	if (!infile) {
 		printf("\nError opening file\n");
+		return -1;
 	}
-
-	//uswtime(&utime0, &stime0, &wtime0);
-
-	textDeco = malloc(sim + 1);
-
-	for (int a = 0; a < sim; ++a) {
-		fscanf(infile, "%c", &textDeco[a]);
-	}
-
-	fclose(infile);
-
-	infile = fopen("frecuencias.txt", "r");
-	if(!infile) {
+	
+	FILE *doc
+	doc = fopen("frecuencias.txt", "r");
+	if(!doc) {
 		printf("No pude abrir el archivo .txt\n");
 		return -1;
 	}
-	fscanf(infile, "(%ld, %ld, %[^)])\n", &sim, &tbits, extension);
-
+	fscanf(doc, "(%ld, %ld, %[^)])\n", &sim, &tbits, extension);
+	
 	for (int a = 0; a < 256; ++a) {
 		fscanf(infile, "%ld,", &frec[a]);
 	}
-
+	
+	textDeco = malloc(sim + 1);
+	for (int a = 0; a < sim; ++a) {
+		fscanf(infile, "%c", &textDeco[a]);
+	}
+	
+	uswtime(&utime0, &stime0, &wtime0);
 	fclose(infile);
+	fclose(doc);
 	//Reconstruccion del arbol de frecuencias:
 	mergeSort(itFrec, frec, 0, 255);
 
@@ -246,7 +245,7 @@ int main() {
 		wchar = (int*)realloc(wchar,(cont+1)*sizeof(int)); 
 	}
 	
-	//uswtime(&utime1, &stime1, &wtime1);
+	uswtime(&utime1, &stime1, &wtime1);
 
 	int tam_ext = sizeof(extension);
 	int j = 0;
@@ -261,11 +260,10 @@ int main() {
 		j++;
 	}
 	
-	printf("%s\n", nombre);
 	infile = fopen(nombre, "wb");
 	if (!infile){
 		 printf("No he podido crear el archivo");
-		 return 0;
+		 return -1;
 	 }
 
 	for(i = 0; i<cont; i++){
@@ -274,14 +272,16 @@ int main() {
 	
 	fclose(infile);
 	// los datos ya estan
-	printf("Tamaño del archivo decodificado(en bytes): %ld\n", cont);
-	printf("Nombre del archivo decodificado: %s\n", nombre);
-	//printf("Tiempo de ejecucion (Tiempo total)  %.10e s\n",  wtime1 - wtime0);
+	
 	free(wchar);
 	free(arrNodos);
 	free(sec);
 	free(textDeco);
 	free(nombre);
+	printf("Tamaño del archivo decodificado(en bytes): %ld\n", cont);
+	printf("Nombre del archivo decodificado: %s\n", nombre);
+	printf("Tiempo de ejecucion (Tiempo total)  %.10e s\n",  wtime1 - wtime0);
+	
 	return 0;
 }
 
