@@ -202,7 +202,7 @@ int main() {
 	fscanf(doc, "(%ld, %ld, %[^)])\n", &sim, &tbits, extension);
 	
 	for (int a = 0; a < 256; ++a) {
-		fscanf(infile, "%ld,", &frec[a]);
+		fscanf(doc, "%ld,", &frec[a]);
 	}
 	
 	textDeco = malloc(sim + 1);
