@@ -172,7 +172,7 @@ int obtChar(ap_nodo raiz, int sec[]) {
 
 int main() {
 
-	//double utime0, stime0, wtime0,utime1, stime1, wtime1;
+	double utime0, stime0, wtime0,utime1, stime1, wtime1;
 	long sim, i ;
 	char extension[5];
 	long frec[256];
