@@ -186,6 +186,18 @@ int main() {
 		}
 
 	//obtener datos
+	
+	
+	FILE *doc = fopen("frecuencias.txt", "r");
+	if(!doc) {
+		printf("No pude abrir el archivo .txt\n");
+		return -1;
+	}
+	fscanf(doc, "(%ld, %ld, %[^)])\n", &sim, &tbits, extension);
+	for (int a = 0; a < 256; ++a) {
+		fscanf(doc, "%ld,", &frec[a]);
+	}
+	fclose(doc);
 
 	FILE *infile = fopen("codificacion.mugi", "rb");
 	if (!infile) {
@@ -193,17 +205,6 @@ int main() {
 		return -1;
 	}
 	
-	FILE *doc
-	doc = fopen("frecuencias.txt", "r");
-	if(!doc) {
-		printf("No pude abrir el archivo .txt\n");
-		return -1;
-	}
-	fscanf(doc, "(%ld, %ld, %[^)])\n", &sim, &tbits, extension);
-	
-	for (int a = 0; a < 256; ++a) {
-		fscanf(doc, "%ld,", &frec[a]);
-	}
 	
 	textDeco = malloc(sim + 1);
 	for (int a = 0; a < sim; ++a) {
@@ -212,7 +213,7 @@ int main() {
 	
 	uswtime(&utime0, &stime0, &wtime0);
 	fclose(infile);
-	fclose(doc);
+	
 	//Reconstruccion del arbol de frecuencias:
 	mergeSort(itFrec, frec, 0, 255);
 
