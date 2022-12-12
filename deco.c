@@ -278,10 +278,10 @@ int main() {
 	free(arrNodos);
 	free(sec);
 	free(textDeco);
-	free(nombre);
 	printf("Tamaño del archivo decodificado(en bytes): %ld\n", cont);
 	printf("Nombre del archivo decodificado: %s\n", nombre);
 	printf("Tiempo de ejecucion (Tiempo total)  %.10e s\n",  wtime1 - wtime0);
+	free(nombre);
 	
 	return 0;
 }
